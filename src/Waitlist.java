@@ -58,6 +58,11 @@ public class Waitlist {
       }
     }
 
+    while (empty < studentIds.length) {
+      studentIds[empty] = null;
+      empty++;
+    }
+
   }
 
   /**
