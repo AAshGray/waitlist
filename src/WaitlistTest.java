@@ -78,5 +78,49 @@ public class WaitlistTest {
     assertTrue(Arrays.equals(students.getWaitlist(), expected.getWaitlist()));
   }
 
-  
+  @Test
+  void toRemove_emptyWaitlist(){
+    String[] studentIds = {};
+    Set<String> remove = Set.of("a", "b");
+
+    
+    Waitlist students = new Waitlist(studentIds, 7);
+    students.removeStudents(remove);
+
+    String[] expectedStudentIds = {};
+
+    Waitlist expected = new Waitlist(expectedStudentIds, 7);
+    assertTrue(Arrays.equals(students.getWaitlist(), expected.getWaitlist()));
+  }
+
+  @Test
+  void toRemove_skippedStudents(){
+    String[] studentIds = {null, "r", null, "m", "v"};
+    Set<String> remove = Set.of("r", "b");
+
+    
+    Waitlist students = new Waitlist(studentIds, 7);
+    students.removeStudents(remove);
+
+    String[] expectedStudentIds = {"m", "v"};
+
+    Waitlist expected = new Waitlist(expectedStudentIds, 7);
+    assertTrue(Arrays.equals(students.getWaitlist(), expected.getWaitlist()));
+  }
+
+  @Test
+  void toRemove_removeEmptySet(){
+    String[] studentIds = {"x", "r", "q", "m", "v"};
+    Set<String> remove = Set.of();
+
+    
+    Waitlist students = new Waitlist(studentIds, 7);
+    students.removeStudents(remove);
+
+    String[] expectedStudentIds = {"x", "r", "q", "m", "v"};
+
+    Waitlist expected = new Waitlist(expectedStudentIds, 7);
+    assertTrue(Arrays.equals(students.getWaitlist(), expected.getWaitlist()));
+  }
+
 }
